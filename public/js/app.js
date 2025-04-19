@@ -195,10 +195,10 @@ function Withdraw(user) {
     if (askMoney <= bankbalance) {
         user.moneybalance += askMoney
         bankbalance = bankbalance - askMoney
-        user.history.push(`${user.name} withdrew ${askMoney} DH`)
-        alert(`${user.name} withdrew ${askMoney} DH from the bank`)
+        user.history.push(user.name+ " withdraw " +askMoney + " DH")
+        alert(user.name +" withdraw "  +askMoney + " DH from the bank")
     } else {
-        alert(`no balance in the bank`);
+        alert("no balance in the bank");
     }
 }
 

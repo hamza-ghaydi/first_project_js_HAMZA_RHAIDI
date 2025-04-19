@@ -65,12 +65,12 @@ function isValidAge(age) {
 
 // validpassword
 function isValidPassword(password) {
-    if (password.includes(" ")) 
+    if (password.includes(" "))
         return false
-    if (password.length < 7) 
+    if (password.length < 7)
         return false
-    if (!/[@#\-+*/]/.test(password)) 
-    return false
+    if (!/[@#\-+*/]/.test(password))
+        return false
     return true
 }
 
@@ -113,7 +113,8 @@ function login() {
 
     if (user && user.password === password) {
         alert("Login success! Welcome to bank lfo9ara")
-        
+        menu(user)
+
     } else {
         alert("Login failed. Please try again or register.")
     }
@@ -122,7 +123,7 @@ function login() {
 function change_password() {
     let email = prompt("enter your email")
     let user = data_users.find(user => user.email === email)
-    if(!user){
+    if (!user) {
         alert("email not exist, you need to register")
         return
     }
@@ -169,4 +170,55 @@ while (user_function !== "4") {
     }
 
     console.table(data_users);
+}
+
+
+// function Deposit(money) {
+//     if (!isNaN(money)) {
+//         if (money < 1000) {
+//             this.moneybalance += money;
+//             this.history.push(" deposit " + money + " DH to bank" )
+//             alert(this.name + " deposit " + money + " DH to bank" )
+//         } else {
+//             console.log("you don't have enough money to deposit");
+//         }
+//     }
+// }
+
+function Deposit() {
+    let askMoney = parseInt( prompt(`how much you want to deposite`))
+    if (askMoney <= 1000) {
+        this.moneybalance += askMoney
+        // this.history.push(" deposit " + askMoney)
+        alert(this.name + " deposit " + askMoney + " DH to bank" )
+    } else {
+        console.log(`the max is 1000 dh`);
+    }
+}
+
+function menu(user) {
+    let menubank = ""
+    while (menubank !== "4"){
+        menubank = prompt("What do you want to do in the bank:\n1 - Deposit\n2 - Withdraw\n3 - Historie\n4 - Logout")
+    if (menubank === null) {
+        continue
+    }
+    switch (menubank) {
+        case "1":
+            Deposit();
+            break;
+
+        case "2":
+            Withdraw();
+            break;
+
+        case "3":
+            Historie()
+            break;
+
+        default:
+            alert("enter the information")
+            break;
+    }
+    }
 }

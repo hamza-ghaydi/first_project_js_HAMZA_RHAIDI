@@ -35,7 +35,7 @@ function validName(name) {
 // validemail
 function isValidEmail(email) {
     if (email.length < 10) {
-        console.log("name is too short, you need at least 10 charachters");
+        console.log("email is too short, you need at least 10 charachters");
 
         return false
     }
@@ -104,6 +104,19 @@ function sign_up() {
     let newuser = new Users(name, email, age, password)
     data_users.push(newuser)
     alert("welcome to bank lfo9ara")
+}
+
+function login() {
+    let email = prompt("Enter your email").toLowerCase().trim()
+    let password = prompt("Enter your password").trim()
+    let user = data_users.find(user => user.email === email)
+
+    if (user && user.password === password) {
+        alert("Login success! Welcome to bank lfo9ara")
+        
+    } else {
+        alert("Login failed. Please try again or register.")
+    }
 }
 
 let user_function = ""

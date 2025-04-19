@@ -119,6 +119,31 @@ function login() {
     }
 }
 
+function change_password() {
+    let email = prompt("enter your email")
+    let user = data_users.find(user => user.email === email)
+    if(!user){
+        alert("email not exist, you need to register")
+        return
+    }
+    let newpassword = prompt("enter the new password")
+    let newconfirmpassword = prompt("confirm the new password")
+
+    while (newpassword.replace(/\s+/g, '').length !== newpassword.length || newpassword.length < 7 || !/[#@\-+*/]/.test(newpassword) || /\s/.test(newpassword) || newpassword !== newconfirmpassword) {
+        if (newpassword !== newconfirmpassword) {
+            alert("The password do not match")
+        } else {
+            alert("Invalid password. It must contain at least 7 characters and one special character")
+        }
+        newpassword = prompt("enter the new password")
+        newconfirmpassword = prompt("confirm the new password")
+    }
+
+    user.password = newpassword
+    alert("Password changed successfully!")
+    console.table(data_users)
+}
+
 let user_function = ""
 while (user_function !== "4") {
     user_function = prompt("hello, welcome to bank lfo9ara \nsetting: \n1 - sign up \n2 - login \n3 - change password \n4 - exit")

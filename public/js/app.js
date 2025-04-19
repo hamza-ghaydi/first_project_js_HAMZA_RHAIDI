@@ -13,6 +13,9 @@ class Users {
 
 console.log(data_users);
 
+let bankbalance = 0
+
+
 
 // validname function
 function validName(name) {
@@ -173,52 +176,70 @@ while (user_function !== "4") {
 }
 
 
-// function Deposit(money) {
-//     if (!isNaN(money)) {
-//         if (money < 1000) {
-//             this.moneybalance += money;
-//             this.history.push(" deposit " + money + " DH to bank" )
-//             alert(this.name + " deposit " + money + " DH to bank" )
-//         } else {
-//             console.log("you don't have enough money to deposit");
-//         }
-//     }
-// }
 
-function Deposit() {
-    let askMoney = parseInt( prompt(`how much you want to deposite`))
+
+function Deposit(user) {
+    let askMoney = parseInt(prompt(`how much you want to deposite`))
     if (askMoney <= 1000) {
-        this.moneybalance += askMoney
-        // this.history.push(" deposit " + askMoney)
-        alert(this.name + " deposit " + askMoney + " DH to bank" )
+        user.moneybalance -= askMoney
+        bankbalance = askMoney + bankbalance
+        user.history.push(" deposit " + askMoney)
+        alert(user.name + " deposit " + askMoney + " DH to bank")
     } else {
-        console.log(`the max is 1000 dh`);
+        alert(`the max is 1000 dh`);
     }
 }
+
+function Withdraw(user) {
+    let askMoney = parseInt(prompt(`how much money you want`))
+    if (askMoney <= bankbalance) {
+        user.moneybalance += askMoney
+        bankbalance = bankbalance - askMoney
+        user.history.push(`${user.name} withdrew ${askMoney} DH`)
+        alert(`${user.name} withdrew ${askMoney} DH from the bank`)
+    } else {
+        alert(`no balance in the bank`);
+    }
+}
+
+function Historie(user) {
+    if (user.history.length === 0) {
+        alert("No transactions yet.");
+    } else {
+        alert(user.history.join(" - "));
+    }
+}
+
 
 function menu(user) {
     let menubank = ""
-    while (menubank !== "4"){
+    while (menubank !== "4") {
         menubank = prompt("What do you want to do in the bank:\n1 - Deposit\n2 - Withdraw\n3 - Historie\n4 - Logout")
-    if (menubank === null) {
-        continue
-    }
-    switch (menubank) {
-        case "1":
-            Deposit();
-            break;
+        if (menubank === null) {
+            continue
+        }
+        switch (menubank) {
+            case "1":
+                Deposit(user);
+                break;
 
-        case "2":
-            Withdraw();
-            break;
+            case "2":
+                Withdraw(user);
+                break;
 
-        case "3":
-            Historie()
-            break;
+            case "3":
+                Historie(user)
+                break;
 
-        default:
-            alert("enter the information")
-            break;
-    }
+            case "4":
+                alert("logout successfully")
+                break;
+
+            default:
+                alert("enter the information")
+                break;
+        }
     }
 }
+
+console.log("bank balance " + bankbalance);

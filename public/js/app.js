@@ -16,22 +16,63 @@ console.log(data_users);
 
 // validname function
 function validName(name) {
-    if (name.length < 5){
-        console.log("name is too short, you need at least 5 charachters"); 
+    if (name.length < 5) {
+        console.log("name is too short, you need at least 5 charachters");
         return false
     }
-    if (/\d/.test(name)){
+    if (/\d/.test(name)) {
         console.log("remove numbers from name")
         return false
     }
     if (/[@#\-+*/]/.test(name)) {
-            console.log("remove special characters");
-            
+        console.log("remove special characters");
+
         return false
     }
     return true
 }
 
+// validemail
+function isValidEmail(email) {
+    if (email.length < 10) {
+        console.log("name is too short, you need at least 10 charachters");
+
+        return false
+    }
+    if (email.includes(" ")) {
+        console.log("remove spaces");
+
+        return false
+    }
+    if (email.split("@").length !== 2)
+        return false
+
+    // Check if email already exists in data_users
+    let emailexist = data_users.find(user => user.email === email);
+    if (emailexist) return false;
+
+    return true;
+}
+
+// validage
+function isValidAge(age) {
+    if (!/^\d+$/.test(age))
+        return false
+    if (age < 18 || age >= 100)
+        return false
+    return true
+}
+
+// validpassword
+function isValidPassword(password) {
+    if (password.includes(" ")) 
+        return false
+    if (password.length < 7) 
+        return false
+    if (!/[@#\-+*/]/.test(password)) 
+    return false
+    return true
+}
 
 function sign_up() {
     let name = prompt("Enter your Name").toLocaleLowerCase().trim()
